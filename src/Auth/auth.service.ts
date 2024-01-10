@@ -14,7 +14,7 @@ export class AuthService {
     const salt = await bcrypt.genSalt();
     userDto.password = await bcrypt.hash(userDto.password, salt);
     const user = await this.userService.createUser(userDto);
-    return user;
+    return { username: user.username, role: user.role, id: user.id };
   }
 
   async login(username: string, pass: string) {
