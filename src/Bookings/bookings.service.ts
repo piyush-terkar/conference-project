@@ -12,23 +12,17 @@ export class BookingService {
     private roomsService: RoomsService
   ) {}
 
+  async newReservation(start: Date, end: Date, roomId: number, userId: number) {
+    const newReservation = this.bookingRepository.create();
+    newReservation.startTime = start;
+    newReservation.endTime = end;
+    newReservation.roomId = roomId;
+    newReservation.userId = userId;
+    await this.bookingRepository.save(newReservation);
+    return newReservation;
+  }
+
   async findFreeRooms(start: Date, end: Date): Promise<Room[] | undefined> {
-    const allBookings = await this.bookingRepository.find({
-      relations: ["room"],
-    });
-    console.log(allBookings);
-    if (allBookings.length === 0) {
-      return await this.roomsService.getAll();
-    }
-    // return this.bookingRepository
-    //   .createQueryBuilder("booking")
-    //   .leftJoinAndSelect("booking.room", "room")
-    //   .where(
-    //     "(booking.startTime >= :start AND booking.startTime < :end) OR" +
-    //       "(booking.endTime > :start AND booking.endTime <= :end) OR" +
-    //       "(booking.startTime <= :start AND booking.endTime >= :end)",
-    //     { start, end }
-    //   )
-    //   .getMany();
+    return await this.roomsService.getAll();
   }
 }
