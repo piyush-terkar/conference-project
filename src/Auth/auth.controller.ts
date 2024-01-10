@@ -20,7 +20,7 @@ export class AuthController {
 
   @Public()
   @HttpCode(HttpStatus.CREATED)
-  @ApiResponse({ status: 200, type: createUserDto })
+  @ApiResponse({ status: 201, type: createUserDto })
   @Post("register")
   register(@Body() userDto: createUserDto) {
     return this.authService.register(userDto);
