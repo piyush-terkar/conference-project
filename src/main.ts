@@ -8,7 +8,7 @@ async function bootstrap() {
     .setTitle("Conference Room Booking System")
     .setDescription("The conference Room Booking System API description")
     .setVersion("1.0")
-    .addTag("Users")
+    .addTag("Authentication and Users")
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("docs", app, document);
