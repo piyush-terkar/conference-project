@@ -1,7 +1,9 @@
+import { Booking } from "src/Bookings/booking.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -13,6 +15,9 @@ export class Room {
 
   @Column()
   name: string;
+
+  @OneToMany(() => Booking, (booking) => booking.roomId)
+  reservations: Booking;
 
   @CreateDateColumn({
     type: "timestamp",

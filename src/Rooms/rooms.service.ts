@@ -16,4 +16,8 @@ export class RoomsService {
     await this.roomRepository.save(newRoom);
     return newRoom;
   };
+
+  getAll = async () => {
+    return await this.roomRepository.find();
+  };
 }
