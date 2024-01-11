@@ -1,6 +1,10 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { Observable } from "rxjs";
 import { Role } from "./roles.enum";
 import { ROLES_KEY } from "./decorators/roles.decorator";
 
@@ -17,6 +21,11 @@ export class RolesGuard implements CanActivate {
       return true;
     }
     const { user } = context.switchToHttp().getRequest();
-    return requiredRole === user?.role;
+    if (requiredRole === user?.role) {
+      return true;
+    }
+    throw new ForbiddenException(
+      "You are not allowed to create rooms, Only Admins can create rooms"
+    );
   }
 }

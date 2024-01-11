@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Booking } from "./booking.entity";
-import { Between, In, Not, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { RoomsService } from "src/Rooms/rooms.service";
 import { Room } from "src/Rooms/rooms.entity";
 
@@ -12,23 +12,16 @@ export class BookingService {
     private roomsService: RoomsService
   ) {}
 
-  async verifyAvailability(
-    start: Date,
-    end: Date,
-    roomId: number
-  ): Promise<Boolean> {
-    const bookings = this.bookingRepository.findOne({
-      where: {
-        bookingId: roomId,
-        startTime: Not(Between(start, end)),
-        endTime: Not(Between(start, end)),
-      },
-    });
-
-    if (bookings) {
-      return false;
-    }
-    return true;
+  async verifyAvailability(start: Date, end: Date, roomId: number) {
+    const booking = await this.bookingRepository
+      .createQueryBuilder()
+      .where("roomId = :room", { room: roomId })
+      .andWhere(
+        "(startTime BETWEEN :start AND :end OR endTime BETWEEN :start AND :end)",
+        { start, end }
+      )
+      .getOne();
+    return booking;
   }
 
   async newReservation(start: Date, end: Date, roomId: number, userId: number) {
