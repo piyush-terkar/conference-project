@@ -9,6 +9,10 @@ async function bootstrap() {
     .setDescription("The conference Room Booking System API description")
     .setVersion("1.0")
     .addTag("Authentication and Users")
+    .addBearerAuth(
+      { type: "apiKey", name: "Bearer", in: "Authorization header" },
+      "JWT Token"
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("docs", app, document);

@@ -1,5 +1,6 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Rooms")
 export class RoomDto {
   @ApiProperty()
   id: number;

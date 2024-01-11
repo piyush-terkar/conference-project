@@ -10,7 +10,7 @@ import {
 } from "@nestjs/common";
 import { BookingService } from "./bookings.service";
 import { BookingDto } from "./dtos/bookings.dto";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 @Controller("book")
 @ApiBearerAuth()
@@ -18,6 +18,9 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 export class BookingController {
   constructor(private bookingService: BookingService) {}
 
+  @ApiQuery({ name: "end", type: Date })
+  @ApiQuery({ name: "start", type: Date })
+  @ApiResponse({ status: 200, description: "All available rooms are fetched" })
   @Get()
   async getAvailableRooms(@Query() query): Promise<any> {
     if (!query || !query?.start || !query?.end) {
@@ -29,6 +32,11 @@ export class BookingController {
   }
 
   @Post("new")
+  @ApiResponse({ status: 200, description: "The Conference room is reserved" })
+  @ApiResponse({
+    status: 409,
+    description: "The room is already booked for given time slot",
+  })
   async newReservation(@Body() bookingDto: BookingDto, @Request() request) {
     const start = new Date(bookingDto.startTime);
     const end = new Date(bookingDto.endTime);
