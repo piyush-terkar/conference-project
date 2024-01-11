@@ -22,8 +22,8 @@ export class User {
   @Column()
   role: string;
 
-  @OneToMany(() => Booking, (booking) => booking.userId)
-  bookings: Booking;
+  @OneToMany(() => Booking, (booking) => booking.user)
+  bookings: Booking[];
 
   @CreateDateColumn({
     type: "timestamp",

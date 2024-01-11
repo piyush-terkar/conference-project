@@ -16,8 +16,8 @@ export class Room {
   @Column()
   name: string;
 
-  @OneToMany(() => Booking, (booking) => booking.roomId)
-  reservations: Booking;
+  @OneToMany(() => Booking, (booking) => booking.room)
+  bookings: Booking[];
 
   @CreateDateColumn({
     type: "timestamp",
