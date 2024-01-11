@@ -10,8 +10,11 @@ import {
 import { BookingService } from "./bookings.service";
 import { query } from "express";
 import { BookingDto } from "./dtos/bookings.dto";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @Controller("book")
+@ApiBearerAuth()
+@ApiTags("Bookings")
 export class BookingController {
   constructor(private bookingService: BookingService) {}
 

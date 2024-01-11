@@ -23,6 +23,6 @@ export class BookingService {
   }
 
   async findFreeRooms(start: Date, end: Date): Promise<Room[] | undefined> {
-    return await this.roomsService.getAll();
+    return await this.roomsService.getAll(start, end);
   }
 }
