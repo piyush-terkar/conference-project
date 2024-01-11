@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Body,
+  ConflictException,
   Controller,
   Get,
   Post,
@@ -8,7 +9,6 @@ import {
   Request,
 } from "@nestjs/common";
 import { BookingService } from "./bookings.service";
-import { query } from "express";
 import { BookingDto } from "./dtos/bookings.dto";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
@@ -30,9 +30,15 @@ export class BookingController {
 
   @Post("new")
   async newReservation(@Body() bookingDto: BookingDto, @Request() request) {
+    const start = new Date(bookingDto.startTime);
+    const end = new Date(bookingDto.endTime);
+    if (this.bookingService.verifyAvailability(start, end, bookingDto.roomId)) {
+      throw new ConflictException();
+    }
+
     return await this.bookingService.newReservation(
-      new Date(bookingDto.startTime),
-      new Date(bookingDto.endTime),
+      start,
+      end,
       bookingDto.roomId,
       request.user.id
     );
