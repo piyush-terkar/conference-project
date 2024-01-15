@@ -5,7 +5,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">A Conference Room booking app developed using <a href="http://nodejs.org" target="_blank">Node.js</a>(Nest.js) framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -24,7 +24,22 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+System should make sure two people don’t book the same conference room at the same time.
+
+### APIs Implemented as per requirements -
+
+1. Add new conference rooms (Only admin should be allowed to call).
+
+2. Get list of conference rooms which are available between a given “start-time” and “end-time".
+
+3. Book a conference room for a given “start time” to “end time”.
+
+## Requirements
+
+1. Nodejs V.20 LTS
+2. Nest js CLI
+3. MySQL Database with user "user" and password set to "password"
+4. Database Named "conferenceRooms"
 
 ## Installation
 
@@ -45,29 +60,20 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Architecture
 
-```bash
-# unit tests
-$ npm run test
+### Database Schema:
 
-# e2e tests
-$ npm run test:e2e
+<div style="background: whitesmoke;">
+<img src="./conferenceRooms.svg" />
+</div>
 
-# test coverage
-$ npm run test:cov
-```
+### System Architecture:
 
-## Support
+<div style="background: whitesmoke;">
+<img src="./system_Architecture.drawio.svg" />
+</div>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## API usage:
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+The API is self documented and all the Requests, Responses, and other request parameters are documented using the swagger OPEN API standard and can be found at http://localhost:3000/docs after running the app
