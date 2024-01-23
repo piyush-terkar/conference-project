@@ -22,10 +22,10 @@ export class RoomDto {
   @ApiProperty()
   @IsOptional()
   @IsDateString()
-  created_at: Date;
+  createdAt: Date;
 
   @ApiProperty()
   @IsOptional()
   @IsDateString()
-  updated_at: Date;
+  updatedAt: Date;
 }
