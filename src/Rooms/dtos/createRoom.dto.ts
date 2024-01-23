@@ -12,7 +12,7 @@ export class RoomDto {
   @IsOptional()
   @IsNumber()
   @ApiProperty()
-  id: number;
+  id?: number;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -22,10 +22,10 @@ export class RoomDto {
   @ApiProperty()
   @IsOptional()
   @IsDateString()
-  createdAt: Date;
+  createdAt?: Date;
 
   @ApiProperty()
   @IsOptional()
   @IsDateString()
-  updatedAt: Date;
+  updatedAt?: Date;
 }

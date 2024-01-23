@@ -19,7 +19,7 @@ export class BookingDto {
   @ApiProperty()
   @IsOptional()
   @IsNumberString()
-  userId: number;
+  userId?: number;
 
   @ApiProperty()
   @IsNotEmpty()
