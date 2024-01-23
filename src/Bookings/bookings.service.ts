@@ -12,7 +12,11 @@ export class BookingService {
     private roomsService: RoomsService
   ) {}
 
-  async verifyAvailability(start: Date, end: Date, roomId: number) {
+  async verifyAvailability(
+    start: Date,
+    end: Date,
+    roomId: number
+  ): Promise<Booking> {
     const booking = await this.bookingRepository
       .createQueryBuilder()
       .where("roomId = :room", { room: roomId })
@@ -24,7 +28,12 @@ export class BookingService {
     return booking;
   }
 
-  async newReservation(start: Date, end: Date, roomId: number, userId: number) {
+  async newReservation(
+    start: Date,
+    end: Date,
+    roomId: number,
+    userId: number
+  ): Promise<Booking> {
     const newReservation = this.bookingRepository.create();
     newReservation.startTime = start;
     newReservation.endTime = end;

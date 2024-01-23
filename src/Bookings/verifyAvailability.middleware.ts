@@ -7,7 +7,7 @@ import { isNull } from "util";
 export class VerifyAvailability implements NestMiddleware {
   constructor(private bookingService: BookingService) {}
 
-  async use(req: Request, res: Response, next: NextFunction) {
+  async use(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { startTime, endTime, roomId } = req.body;
     const bookings = await this.bookingService.verifyAvailability(
       new Date(startTime),

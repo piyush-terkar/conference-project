@@ -3,6 +3,8 @@ import { UserService } from "src/Users/users.service";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import { createUserDto } from "src/Users/dtos/createUser.dto";
+import { ProfileDto } from "./dtos/profile.dto";
+import { AccessTokenDto } from "./dtos/accessToken.dto";
 @Injectable()
 export class AuthService {
   constructor(
@@ -10,14 +12,14 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async register(userDto: createUserDto) {
+  async register(userDto: createUserDto): Promise<ProfileDto> {
     const salt = await bcrypt.genSalt();
     userDto.password = await bcrypt.hash(userDto.password, salt);
     const user = await this.userService.createUser(userDto);
     return { username: user.username, role: user.role, id: user.id };
   }
 
-  async login(username: string, pass: string) {
+  async login(username: string, pass: string): Promise<AccessTokenDto> {
     const user = await this.userService.findOne(username);
     const isMatch = await bcrypt.compare(pass, user?.password);
     if (!isMatch) {

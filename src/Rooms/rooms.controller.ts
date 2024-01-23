@@ -15,7 +15,7 @@ export class RoomsController {
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({ status: 201, type: RoomDto })
   @ApiBearerAuth("bearer:token")
-  createRoom(@Body() roomDto: RoomDto) {
+  createRoom(@Body() roomDto: RoomDto): Promise<RoomDto> {
     return this.roomsService.newRoom(roomDto);
   }
 }

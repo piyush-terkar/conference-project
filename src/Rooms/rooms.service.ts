@@ -10,14 +10,14 @@ export class RoomsService {
     @InjectRepository(Room) private roomRepository: Repository<Room>
   ) {}
 
-  newRoom = async (roomDto: RoomDto) => {
+  newRoom = async (roomDto: RoomDto): Promise<RoomDto> => {
     const newRoom = this.roomRepository.create();
     newRoom.name = roomDto.name;
     await this.roomRepository.save(newRoom);
     return newRoom;
   };
 
-  getAll = async (start: Date, end: Date) => {
+  getAll = async (start: Date, end: Date): Promise<Room[] | undefined> => {
     const bookedRooms = await this.roomRepository.find({
       select: { id: true },
       relations: { bookings: true },
@@ -27,7 +27,6 @@ export class RoomsService {
       ],
     });
     const bookedIds = bookedRooms.map((booking) => booking.id);
-    console.log(bookedIds);
 
     return await this.roomRepository.find({
       where: { id: Not(In(bookedIds)) },
