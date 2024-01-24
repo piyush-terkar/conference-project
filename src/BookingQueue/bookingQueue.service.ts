@@ -28,4 +28,8 @@ export class BookingQueueService {
   async getAllByID(id: number): Promise<BookingQueue[] | undefined> {
     return await this.bookingQueueRepo.find({ where: { roomId: id } });
   }
+
+  async removeFromQueue(entity: BookingQueue) {
+    await this.bookingQueueRepo.remove(entity);
+  }
 }

@@ -63,6 +63,7 @@ export class BookingService {
           queue[i].roomId,
           queue[i].userId
         );
+        await this.bookingQueueService.removeFromQueue(queue[i]);
         break;
       }
     }
