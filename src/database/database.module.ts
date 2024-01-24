@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Booking } from "src/Bookings/booking.entity";
+import { Cancelation } from "src/Cancelations/cancelations.entity";
 import { Room } from "src/Rooms/rooms.entity";
 import { User } from "src/Users/users.entity";
 
@@ -13,7 +14,7 @@ import { User } from "src/Users/users.entity";
       username: "root",
       password: "password",
       database: "conferenceRooms",
-      entities: [User, Room, Booking],
+      entities: [User, Room, Booking, Cancelation],
       synchronize: true,
     }),
   ],
