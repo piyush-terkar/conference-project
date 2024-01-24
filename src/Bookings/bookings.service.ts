@@ -46,4 +46,15 @@ export class BookingService {
   async findFreeRooms(start: Date, end: Date): Promise<Room[] | undefined> {
     return await this.roomsService.getAll(start, end);
   }
+
+  async findAndDelete(id: number): Promise<void> {
+    const cancellation = await this.bookingRepository.findOneBy({
+      bookingId: id,
+    });
+    await this.bookingRepository.remove(cancellation);
+  }
+
+  async findById(id: number): Promise<Booking> {
+    return await this.bookingRepository.findOne({ where: { bookingId: id } });
+  }
 }

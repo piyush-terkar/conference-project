@@ -3,7 +3,9 @@ import {
   Body,
   ConflictException,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Query,
   Request,
@@ -55,5 +57,14 @@ export class BookingController {
       bookingDto.roomId,
       request.user.id
     );
+  }
+
+  @Delete(":id")
+  async cancelReservation(
+    @Param("id") id: number,
+    @Body("reason") reason: string
+  ) {
+    await this.bookingService.findAndDelete(id);
+    return `Cancelled due to: ${reason}`;
   }
 }
