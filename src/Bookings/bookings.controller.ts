@@ -64,7 +64,7 @@ export class BookingController {
     @Param("id") id: number,
     @Body("reason") reason: string
   ) {
-    await this.bookingService.findAndDelete(id);
+    await this.bookingService.findAndDeletewithReason(id, reason);
     return `Cancelled due to: ${reason}`;
   }
 }

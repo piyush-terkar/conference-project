@@ -4,12 +4,14 @@ import { Booking } from "./booking.entity";
 import { Repository } from "typeorm";
 import { RoomsService } from "src/Rooms/rooms.service";
 import { Room } from "src/Rooms/rooms.entity";
+import { CancelationService } from "src/Cancelations/cancelations.service";
 
 @Injectable()
 export class BookingService {
   constructor(
     @InjectRepository(Booking) private bookingRepository: Repository<Booking>,
-    private roomsService: RoomsService
+    private roomsService: RoomsService,
+    private cancelationService: CancelationService
   ) {}
 
   async verifyAvailability(
@@ -47,10 +49,11 @@ export class BookingService {
     return await this.roomsService.getAll(start, end);
   }
 
-  async findAndDelete(id: number): Promise<void> {
+  async findAndDeletewithReason(id: number, reason: string): Promise<void> {
     const cancellation = await this.bookingRepository.findOneBy({
       bookingId: id,
     });
+    await this.cancelationService.addCancellation(cancellation, reason);
     await this.bookingRepository.remove(cancellation);
   }
 
