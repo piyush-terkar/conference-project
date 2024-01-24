@@ -12,12 +12,14 @@ import { RoomsModule } from "src/Rooms/rooms.module";
 import { VerifyAvailability } from "./verifyAvailability.middleware";
 import { IsOwner } from "./isOwner.middleware";
 import { CancelationModule } from "src/Cancelations/cancelations.module";
+import { BookingQueueModule } from "src/BookingQueue/bookingQueue.module";
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Booking]),
     RoomsModule,
     CancelationModule,
+    BookingQueueModule,
   ],
   exports: [BookingService],
   providers: [BookingService],

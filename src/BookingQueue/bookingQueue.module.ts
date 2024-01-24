@@ -7,7 +7,7 @@ import { BookingModule } from "src/Bookings/bookings.module";
 import { BookingQueueService } from "./bookingQueue.service";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BookingQueue]), BookingModule],
+  imports: [TypeOrmModule.forFeature([BookingQueue])],
   exports: [BookingQueueService],
   providers: [BookingQueueService],
   controllers: [BookingQueueController],

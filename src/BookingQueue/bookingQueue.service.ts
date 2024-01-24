@@ -24,4 +24,8 @@ export class BookingQueueService {
     await this.bookingQueueRepo.save(bookingQ);
     return bookingQ;
   }
+
+  async getAllByID(id: number): Promise<BookingQueue[] | undefined> {
+    return await this.bookingQueueRepo.find({ where: { roomId: id } });
+  }
 }
