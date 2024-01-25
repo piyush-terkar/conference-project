@@ -19,16 +19,9 @@ export class Room {
   @OneToMany(() => Booking, (booking) => booking.room)
   bookings: Booking[];
 
-  @CreateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
-  })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
-    onUpdate: "CURRENT_TIMESTAMP(6)",
-  })
+  @UpdateDateColumn()
   updatedAt: Date;
 }
