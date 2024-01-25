@@ -9,12 +9,14 @@ import {
   Post,
   Query,
   Request,
+  UseGuards,
 } from "@nestjs/common";
 import { BookingService } from "./bookings.service";
 import { BookingDto } from "./dtos/bookings.dto";
 import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { ParseDatePipe } from "src/Auth/pipes/parseDate.pipe";
 import { RoomDto } from "src/Rooms/dtos/createRoom.dto";
+import { IsOwner } from "./isOwner.guard";
 
 @Controller("book")
 @ApiBearerAuth()
@@ -60,6 +62,7 @@ export class BookingController {
   }
 
   @Delete(":id")
+  @UseGuards(IsOwner)
   async cancelReservation(
     @Param("id") id: number,
     @Body("reason") reason: string
