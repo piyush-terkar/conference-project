@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
-import { BookingService } from "./bookings.service";
+import { BookingService } from "../bookings.service";
 import { isNull } from "util";
 
 @Injectable()

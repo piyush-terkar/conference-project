@@ -9,7 +9,7 @@ import { Booking } from "./booking.entity";
 import { BookingService } from "./bookings.service";
 import { BookingController } from "./bookings.controller";
 import { RoomsModule } from "src/Rooms/rooms.module";
-import { VerifyAvailability } from "./verifyAvailability.middleware";
+import { VerifyAvailability } from "./middlewares/verifyAvailability.middleware";
 import { CancelationModule } from "src/Cancelations/cancelations.module";
 import { BookingQueueModule } from "src/BookingQueue/bookingQueue.module";
 

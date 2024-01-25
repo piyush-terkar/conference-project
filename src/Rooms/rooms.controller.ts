@@ -3,7 +3,7 @@ import { RoomsService } from "./rooms.service";
 import { ApiBearerAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { RoomDto } from "./dtos/createRoom.dto";
 import { Roles } from "src/Auth/decorators/roles.decorator";
-import { Role } from "src/Auth/roles.enum";
+import { Role } from "src/Auth/guards/roles.enum";
 
 @ApiTags("Rooms")
 @Controller("rooms")

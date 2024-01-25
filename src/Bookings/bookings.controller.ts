@@ -16,7 +16,7 @@ import { BookingDto } from "./dtos/bookings.dto";
 import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { ParseDatePipe } from "src/Auth/pipes/parseDate.pipe";
 import { RoomDto } from "src/Rooms/dtos/createRoom.dto";
-import { IsOwner } from "./isOwner.guard";
+import { IsOwner } from "./guards/isOwner.guard";
 
 @Controller("book")
 @ApiBearerAuth()

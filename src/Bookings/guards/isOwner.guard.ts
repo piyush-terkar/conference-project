@@ -7,7 +7,7 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { BookingService } from "./bookings.service";
+import { BookingService } from "../bookings.service";
 
 @Injectable()
 export class IsOwner implements CanActivate {
