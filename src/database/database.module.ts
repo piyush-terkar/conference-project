@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { BookingQueue } from "src/BookingQueue/bookingQueue.entity";
 import { Booking } from "src/Bookings/booking.entity";
@@ -8,15 +9,16 @@ import { User } from "src/Users/users.entity";
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "localhost",
-      port: 3306,
-      username: "root",
-      password: "password",
-      database: "conferenceRooms",
+      host: process.env.DATABASE_HOST || "localhost",
+      port: Number(process.env.DATABASE_PORT) || 3306,
+      username: process.env.DATABASE_USERNAME || "root",
+      password: process.env.DATABASE_PASSWORD || "password",
+      database: process.env.DATABASE_NAME || "conferenceRooms",
       entities: [User, Room, Booking, Cancelation, BookingQueue],
-      synchronize: true,
+      synchronize: process.env.NODE_ENV !== "production",
     }),
   ],
 })

@@ -7,9 +7,11 @@ import { AuthModule } from "./Auth/auth.module";
 import { RoomsModule } from "./Rooms/rooms.module";
 import { BookingModule } from "./Bookings/bookings.module";
 import { BookingQueueModule } from "./BookingQueue/bookingQueue.module";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
+    // ConfigModule.forRoot({ isGlobal: true, envFilePath: ".env" }),
     DatabaseModule,
     UsersModule,
     AuthModule,
