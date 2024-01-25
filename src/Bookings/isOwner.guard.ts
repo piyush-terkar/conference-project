@@ -1,6 +1,7 @@
 import {
   CanActivate,
   ExecutionContext,
+  ForbiddenException,
   Injectable,
   UnauthorizedException,
 } from "@nestjs/common";
@@ -19,7 +20,7 @@ export class IsOwner implements CanActivate {
     if (booking.userId === user.id) {
       return true;
     } else {
-      throw new UnauthorizedException(
+      throw new ForbiddenException(
         "Only the user who made a reservation can cancel it, you don't have the required Permissions"
       );
     }
