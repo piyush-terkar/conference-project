@@ -3,6 +3,7 @@ import {
   ExecutionContext,
   ForbiddenException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
 import { Observable } from "rxjs";
@@ -17,6 +18,8 @@ export class IsOwner implements CanActivate {
     const user = request.user;
     const id = request.params.id;
     const booking = await this.bookingService.findById(id);
+    if (!booking)
+      throw new NotFoundException(`No reservation with Booking ID: ${id}`);
     if (booking.userId === user.id) {
       return true;
     } else {

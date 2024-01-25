@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Booking } from "./booking.entity";
 import { Repository } from "typeorm";
@@ -79,6 +79,8 @@ export class BookingService {
         bookingId: id,
       },
     });
+    if (cancellation == undefined)
+      throw new NotFoundException(`No Reservation with Booking ID: ${id}`);
     const queue = await this.bookingQueueService.getAllByID(
       cancellation.roomId
     );

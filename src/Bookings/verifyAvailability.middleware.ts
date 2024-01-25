@@ -16,9 +16,6 @@ export class VerifyAvailability implements NestMiddleware {
     );
     if (!isNull(bookings)) {
       res.redirect(307, "/queue/new");
-      // throw new ConflictException(
-      //   `Conference Room with ID: ${roomId} is already booked between ${startTime} and ${endTime}`
-      // );
     } else {
       next();
     }
