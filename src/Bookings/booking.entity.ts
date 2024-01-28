@@ -26,10 +26,10 @@ export class Booking {
   endTime: Date;
 
   @ManyToOne(() => User, (user) => user.bookings)
-  @JoinColumn({ name: "userId" })
+  // @JoinColumn({ name: "userId" })
   user: User;
 
   @ManyToOne(() => Room, (room) => room.bookings)
-  @JoinColumn({ name: "roomId" })
+  // @JoinColumn({ name: "roomId" })
   room: Room;
 }
