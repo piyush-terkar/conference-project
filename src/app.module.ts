@@ -8,10 +8,11 @@ import { RoomsModule } from "./Rooms/rooms.module";
 import { BookingModule } from "./Bookings/bookings.module";
 import { BookingQueueModule } from "./BookingQueue/bookingQueue.module";
 import { ConfigModule } from "@nestjs/config";
+import { ScheduleModule } from "@nestjs/schedule";
 
 @Module({
   imports: [
-    // ConfigModule.forRoot({ isGlobal: true, envFilePath: ".env" }),
+    ScheduleModule.forRoot(),
     DatabaseModule,
     UsersModule,
     AuthModule,

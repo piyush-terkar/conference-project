@@ -52,7 +52,6 @@ export class BookingController {
   ): Promise<BookingDto> {
     const start = new Date(bookingDto.startTime);
     const end = new Date(bookingDto.endTime);
-
     return await this.bookingService.newReservation(
       start,
       end,

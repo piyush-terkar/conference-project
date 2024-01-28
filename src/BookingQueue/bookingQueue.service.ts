@@ -1,7 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BookingQueue } from "./bookingQueue.entity";
 import { Repository } from "typeorm";
+import { Cron } from "@nestjs/schedule";
 
 @Injectable()
 export class BookingQueueService {
@@ -27,6 +28,16 @@ export class BookingQueueService {
 
   async getAllByID(id: number): Promise<BookingQueue[] | undefined> {
     return await this.bookingQueueRepo.find({ where: { roomId: id } });
+  }
+
+  @Cron("*/5 * * * *")
+  async removeExpiredEntries(): Promise<void> {
+    Logger.log("Expired entries cleared from Booking Queue.", "BookingQueue");
+    await this.bookingQueueRepo
+      .createQueryBuilder()
+      .delete()
+      .where("endTime <= :currTime", { currTime: new Date() })
+      .execute();
   }
 
   async removeFromQueue(entity: BookingQueue) {
