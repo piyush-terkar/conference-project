@@ -17,11 +17,13 @@ export class BookingQueueService {
     roomId: number,
     userId: number
   ): Promise<BookingQueue> {
-    const bookingQ = this.bookingQueueRepo.create();
-    bookingQ.startTime = start;
-    bookingQ.endTime = end;
-    bookingQ.roomId = roomId;
-    bookingQ.userId = userId;
+    const bookingQ = {
+      ...this.bookingQueueRepo.create(),
+      startTime: start,
+      endTime: end,
+      roomId: roomId,
+      userId: userId,
+    };
     await this.bookingQueueRepo.save(bookingQ);
     return bookingQ;
   }

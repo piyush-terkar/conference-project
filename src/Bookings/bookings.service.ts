@@ -39,11 +39,13 @@ export class BookingService {
     roomId: number,
     userId: number
   ): Promise<Booking> {
-    const newReservation = this.bookingRepository.create();
-    newReservation.startTime = start;
-    newReservation.endTime = end;
-    newReservation.roomId = roomId;
-    newReservation.userId = userId;
+    const newReservation = {
+      ...this.bookingRepository.create(),
+      startTime: start,
+      endTime: end,
+      roomId: roomId,
+      userId: userId,
+    };
     await this.bookingRepository.save(newReservation);
     return newReservation;
   }
