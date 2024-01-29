@@ -65,7 +65,7 @@ $ npm run start:prod
 ### Database Schema:
 
 <div style="background: whitesmoke;">
-<img src="./conferenceRooms.svg" />
+<img src="./conference_rooms_schema.png" />
 </div>
 
 ### System Architecture:
